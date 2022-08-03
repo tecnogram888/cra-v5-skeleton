@@ -16,6 +16,23 @@ export const editorSlice = createSlice({
             }, 'asdf', 'next']
         },
         num_oranges: 3,
+        editorDB: {
+            1: {
+                title: 'titles',
+                children: [2, 'asdf', 'next']
+            },
+            2: {
+                title: 'sub child',
+                children: [3],
+            },
+            3: {
+                children: [4, 'asdf', 'next']
+            },
+            4: {
+                title: 'sub sub child',
+                children: []
+            },
+        },
     },
     reducers: {
         increment: (state) => {

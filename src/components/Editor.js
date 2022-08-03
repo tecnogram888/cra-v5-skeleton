@@ -6,22 +6,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import css from './Editor.module.css'
 
 const Editor = (props) => {
-    const num_oranges = useSelector((state) => state.editor.num_oranges)
+    const { id } = props
+    const editorDB = useSelector((state) => state.editor.editorDB)
     const dispatch = useDispatch()
-    const title = props.value.title
-    const children = props.value.children
+
+    console.log('props', props)
+    console.log('id', id)
+    console.log('editorDB', editorDB)
+    const mainObj = editorDB[id]
+    console.log('main', mainObj)
+    const title = mainObj.title
+    const children = mainObj.children
+
     let expanded
 
     if (children.length) {
         expanded = children.map((child, i) => {
-            if (child instanceof Object) {
-                return <Editor value={child} key={i} />
+            if (Number.isInteger(child)) {
+                return <Editor id={child} key={i} />
             } else {
                 return <li key={i}>Value is {child.toString()}</li>
             }
         })
     }
-    console.log(num_oranges, 'num_or')
+    // console.log(num_oranges, 'num_or')
     const titleString = `Title is ${title}`;
     return <div className={css.editorBox}>
         <div key={0}>{titleString}</div>
@@ -32,7 +40,7 @@ const Editor = (props) => {
         >
             Increment
         </button>
-        <span>{num_oranges}</span>
+        {/* <span>{num_oranges}</span> */}
         <button
             aria-label="Decrement value"
             onClick={() => dispatch(decrement())}
