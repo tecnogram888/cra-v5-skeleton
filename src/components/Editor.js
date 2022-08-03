@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { decrement, increment } from './editorSlice'
+import { useSelector, useDispatch } from 'react-redux';
 
 import css from './Editor.module.css'
 
 const Editor = (props) => {
     const num_oranges = useSelector((state) => state.editor.num_oranges)
+    const dispatch = useDispatch()
     const title = props.value.title
     const children = props.value.children
     let expanded
@@ -24,6 +26,19 @@ const Editor = (props) => {
     return <div className={css.editorBox}>
         <div key={0}>{titleString}</div>
         {expanded}
+        <button
+            aria-label="Increment value"
+            onClick={() => dispatch(increment())}
+        >
+            Increment
+        </button>
+        <span>{num_oranges}</span>
+        <button
+            aria-label="Decrement value"
+            onClick={() => dispatch(decrement())}
+        >
+            Decrement
+        </button>
     </div>
 }
 
