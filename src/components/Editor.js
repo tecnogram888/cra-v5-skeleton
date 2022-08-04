@@ -7,6 +7,7 @@ import css from './Editor.module.css'
 
 const Editor = (props) => {
     const { id } = props
+    const num_oranges = useSelector((state) => state.editor.num_oranges)
     const editorDB = useSelector((state) => state.editor.editorDB)
     const dispatch = useDispatch()
 
@@ -40,7 +41,7 @@ const Editor = (props) => {
         >
             Increment
         </button>
-        {/* <span>{num_oranges}</span> */}
+        <span>{num_oranges}</span>
         <button
             aria-label="Decrement value"
             onClick={() => dispatch(decrement())}
